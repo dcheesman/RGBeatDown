@@ -1,20 +1,21 @@
 #include <LiquidCrystal.h>
 
-const PREGAME = 0;
-const RUNGAME = 1;
-const RESULTS = 2;
+const int PREGAME = 0;
+const int RUNGAME = 1;
+const int RESULTS = 2;
 
 int gameState;
 
 int preGameMillis = 15000;
 int gameMillis = 20000;
 
-Color roundColor;
+
 
 Player p1;
 Player p2;
-countDown preGameCountDown;
-countDown gameCountDown;
+CountDown preGameCountDown;
+CountDown gameCountDown;
+Color roundColor;
 
 
 void setup() {
@@ -52,7 +53,7 @@ void reset() {
 
     preGameCountDown.start()
     gameState = PREGAME;
-    
+
     roundColor.randomize();
 }
 
@@ -72,7 +73,7 @@ void runGame () {
    lcd.print("Match Colors");
    lcd.setCursor(0,1);
    lcd.print(gameCountDown.seconds());
-   
+
    if(gameCountDown.isDone() || (p1.locked && p2.locked)){
       if(!p1.locked) {
         p1.lockInGuess();
@@ -80,7 +81,7 @@ void runGame () {
       if(!p2.locked) {
         p2.lockInGuess();
       }
-      
+
       p1.score = roundColor.calculateColorScore(p1);
       p1.score = roundColor.calculateColorScore(p1);
 
@@ -90,16 +91,16 @@ void runGame () {
 
 void results () {
    lcd.setCursor(0,0);
-   lcd.print("Game Over");   
+   lcd.print("Game Over");
    delay(2000);
-   
+
    lcd.setCursor(0,0);
    lcd.print("P1: " + p1.score);
    lcd.setCursor(0,1);
    lcd.print("P2: " + p2.score);
    delay(2000);
-   
-   
-   
+
+
+
    reset();
 }
