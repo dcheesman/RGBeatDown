@@ -6,11 +6,12 @@
 
 class Player {
   private:
-    const int RED = 0;
-    const int GREEN = 1;
-    const int BLUE = 2;
+
     
   public:
+    static const int RED = 0;
+    static const int GREEN = 1;
+    static const int BLUE = 2;
     Color* color;
     boolean locked;
     int locktime;
@@ -19,6 +20,7 @@ class Player {
     void init();
     void reset();
     void nextMode();
+    void colorChange(int delta);
     void lockInGuess();
 
 };

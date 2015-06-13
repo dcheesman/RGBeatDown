@@ -81,6 +81,24 @@ void runGame () {
    lcd.print("Match Colors");
    lcd.setCursor(0,1);
    lcd.print(gameCountDown->seconds());
+   
+   // TODO: set center LED to roundColor
+   // TODO: read the mode switch input
+   // TODO: read the color change dial
+   // TODO: read the lock buttons
+   
+   // TODO: set player's lock status
+   // p1->lockInGuess();
+   // p2->lockInGuess();
+   
+   // TODO: set player's color mode leds
+   // p1->colorMode()
+   // p2->colorMode()
+   
+   // TODO: set player's result led
+   // p1->colorChange(int [how much it changed]
+   // p2->colorChange(int [how much it changed]   
+
 
    if(gameCountDown->isDone() || (p1->locked && p2->locked)){
       if(!p1->locked) {
@@ -108,7 +126,7 @@ void results () {
    lcd.print("P2: " + p2->score);
    delay(2000);
 
-
+   
 
    reset();
 }

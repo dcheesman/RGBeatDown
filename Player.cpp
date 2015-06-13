@@ -19,6 +19,23 @@ void Player::nextMode() {
   colorMode %= 3;
 }
 
+void Player::colorChange(int delta) {
+  switch (colorMode) {
+    case RED:
+      color->red += delta;
+      color->red = constrain(color->red, 0, 255);
+      break;
+    case GREEN:
+      color->green += delta;
+      color->green = constrain(color->green, 0, 255);
+      break;
+    case BLUE:
+      color->blue += delta;
+      color->blue = constrain(color->blue, 0, 255);
+      break;
+  }
+}
+
 void Player::lockInGuess () {
   locked = true;
   locktime = millis();
