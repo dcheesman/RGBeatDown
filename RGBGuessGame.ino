@@ -1,4 +1,6 @@
 #include <LiquidCrystal.h>
+#include "Color.h"
+#include "Player.h"
 
 const int PREGAME = 0;
 const int RUNGAME = 1;
@@ -10,12 +12,12 @@ int preGameMillis = 15000;
 int gameMillis = 20000;
 
 
-
+Color roundColor;
 Player p1;
 Player p2;
 CountDown preGameCountDown;
 CountDown gameCountDown;
-Color roundColor;
+
 
 
 void setup() {
