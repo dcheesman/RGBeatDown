@@ -13,7 +13,7 @@ class Color {
     int blue;
     void init();
     void randomize();
-    int calculateColorScore(Color c2);
+    int calculateColorScore(Color* c2);
 };
 
 #endif

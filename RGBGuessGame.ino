@@ -1,6 +1,10 @@
 #include <LiquidCrystal.h>
 #include "Color.h"
 #include "Player.h"
+#include "CountDown.h"
+
+// TODO: initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 const int PREGAME = 0;
 const int RUNGAME = 1;
@@ -12,11 +16,11 @@ int preGameMillis = 15000;
 int gameMillis = 20000;
 
 
-Color roundColor;
-Player p1;
-Player p2;
-CountDown preGameCountDown;
-CountDown gameCountDown;
+Color* roundColor;
+Player* p1;
+Player* p2;
+CountDown* preGameCountDown;
+CountDown* gameCountDown;
 
 
 
@@ -39,10 +43,11 @@ void loop() {
       runGame();
       break;
     case RESULTS:
-      results()
+      results();
       break;
     default:
       //something went wrong if you're here
+      break;
   }
 }
 
@@ -50,22 +55,23 @@ void reset() {
     p1 = new Player();
     p2 = new Player();
 
-    gameCountDown = new CountDown(gameMillis);
-    preGameCountDown = new CountDown(preGameMillis);
-
-    preGameCountDown.start()
+    gameCountDown = new CountDown();
+    gameCountDown->init(gameMillis);
+    preGameCountDown = new CountDown();
+    preGameCountDown->init(preGameMillis);
+    preGameCountDown->start();
     gameState = PREGAME;
 
-    roundColor.randomize();
+    roundColor->randomize();
 }
 
 void preGame () {
    lcd.setCursor(0,0);
    lcd.print("Staring in");
    lcd.setCursor(0,1);
-   lcd.print(preGameCountDown.seconds());
-   if(preGameCountDown.isDone()){
-     gameCountDown.start();
+   lcd.print(preGameCountDown->seconds());
+   if(preGameCountDown->isDone()){
+     gameCountDown->start();
      gameState = RUNGAME;
    }
 }
@@ -74,18 +80,18 @@ void runGame () {
    lcd.setCursor(0,0);
    lcd.print("Match Colors");
    lcd.setCursor(0,1);
-   lcd.print(gameCountDown.seconds());
+   lcd.print(gameCountDown->seconds());
 
-   if(gameCountDown.isDone() || (p1.locked && p2.locked)){
-      if(!p1.locked) {
-        p1.lockInGuess();
+   if(gameCountDown->isDone() || (p1->locked && p2->locked)){
+      if(!p1->locked) {
+        p1->lockInGuess();
       }
-      if(!p2.locked) {
-        p2.lockInGuess();
+      if(!p2->locked) {
+        p2->lockInGuess();
       }
 
-      p1.score = roundColor.calculateColorScore(p1);
-      p1.score = roundColor.calculateColorScore(p1);
+      p1->score = roundColor->calculateColorScore(p1->color);
+      p2->score = roundColor->calculateColorScore(p2->color);
 
       gameState = RESULTS;
    }
@@ -97,9 +103,9 @@ void results () {
    delay(2000);
 
    lcd.setCursor(0,0);
-   lcd.print("P1: " + p1.score);
+   lcd.print("P1: " + p1->score);
    lcd.setCursor(0,1);
-   lcd.print("P2: " + p2.score);
+   lcd.print("P2: " + p2->score);
    delay(2000);
 
 

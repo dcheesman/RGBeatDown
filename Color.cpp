@@ -12,11 +12,11 @@ void Color::randomize() {
   blue = floor(random(255));
 }
 
-int Color::calculateColorScore(Color c2) {
+int Color::calculateColorScore(Color* c2) {
   int score = 0;
-    score += abs(c2.red - red);
-    score += abs(c2.green - green);
-    score += abs(c2.blue - blue);
+    score += abs(c2->red - red);
+    score += abs(c2->green - green);
+    score += abs(c2->blue - blue);
 
     return score;
 }

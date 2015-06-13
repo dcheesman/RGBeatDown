@@ -6,13 +6,13 @@
 
 class Player {
   private:
-    boolean locked;
-    Color* color;
     const int RED = 0;
     const int GREEN = 1;
     const int BLUE = 2;
     
   public:
+    Color* color;
+    boolean locked;
     int locktime;
     int colorMode;
     int score;
