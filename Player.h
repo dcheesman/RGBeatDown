@@ -14,6 +14,8 @@ class Player {
     static const int BLUE = 2;
     Color* color;
     boolean locked;
+    boolean isIncrement;
+    int startPosition;
     int locktime;
     int colorMode;
     int score;
@@ -22,6 +24,7 @@ class Player {
     void nextMode();
     void colorChange(int delta);
     void lockInGuess();
+    int currentPosition();
 
 };
 

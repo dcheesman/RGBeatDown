@@ -24,10 +24,7 @@ struct CRGB {
   unsigned char b;
 } *leds;
 
-int lightState = 0;
-
 void setup() {
-  Serial.begin(9600);
   ws2811.init(LED_DATA_PIN, NUM_LEDS);
   
   leds = (struct CRGB*)ws2811.getRGBData();

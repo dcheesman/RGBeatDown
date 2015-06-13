@@ -15,8 +15,17 @@ void Player::reset() {
 }
 
 void Player::nextMode() {
-  colorMode++;
+  
+  if (isIncrement) {
+    colorMode++;  
+  } else {
+    colorMode--;
+  }
   colorMode %= 3;
+}
+
+int Player::currentPosition() {
+  return startPosition + colorMode;
 }
 
 void Player::colorChange(int delta) {
